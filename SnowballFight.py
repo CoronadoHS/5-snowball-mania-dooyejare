@@ -1,4 +1,4 @@
-''' 
+'''
     Name: Snowball-Mania
     Author: Jared Dooyema
     Date: 
@@ -11,7 +11,8 @@ import time
 from colorama import init, Fore, Back, Style
 
 init()
-print("Hello " + Fore.RED + "World!")
+print("Hello " + Fore.LIGHTYELLOW_EX + "World!")# + Style.RESET_ALL)
+
 
 def printIntro():
     '''
@@ -116,16 +117,24 @@ def playSnowballFight(players):
         thrower = getThrower(players)
         victim = getVictim(players, thrower)
         hitResult = getHitResult()
-
+        survives1 = (thrower + " throws at "  +victim + Fore.YELLOW + " and hits, but " + victim + Fore.RED+ " survives!" + Style.RESET_ALL)
+        survives2 = (thrower + " attempts to hit "  +victim + Fore.YELLOW + " and succeeds victoriously, however " + victim + Fore.RED+ " remains undeterred!" + Style.RESET_ALL)
+        surviveMessages = [survives1, survives2]
+        hits1 = (thrower + " throws and absolutely destroys " + Fore.GREEN + victim  + " - " + victim + Fore.CYAN+ " is out of the game!!!" + Style.RESET_ALL)
+        hits2 = (thrower + " nails " + Fore.GREEN + victim  + " - " + victim + Fore.CYAN+ " is Donzos!!!" + Style.RESET_ALL)
+        hitMessages = [hits1, hits2]
+        miss1 =(thrower + " throws at " + victim + Fore.MAGENTA+ " but has really bad aim and misses." + Style.RESET_ALL)
+        miss2 =(thrower + " trips on a hidden rock, while throwing at " + victim + Fore.MAGENTA+ " and hits nothing but a poor, innocent snowman bystander." + Style.RESET_ALL)
+        missMessages = [miss1,miss2]
         if (hitResult == True):
             koResult = random.randint(1, 2)     # 1 = not KO, 2 = KO
             if (koResult == 1):
-                print(thrower + " throws at " + victim + " and hits, but " + victim + " survives!")
+                print(random.choice(surviveMessages))
             else:
-                print(thrower + " throws and absolutely destroys " + victim + " - " + victim + " is out of the game!!!")
+                print(random.choice(hitMessages))
                 players.remove(victim)
         else:
-            print(thrower + " throws at " + victim + " but has really bad aim and misses.")
+            print(random.choice(missMessages))
         time.sleep(3)
     
 def printOutro(winner):
